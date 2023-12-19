@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"private": "true",
 	"scripts": {
-		"debug": "npx ts-node-dev ./src/file.ts",
+		"debug": "npx ts-node-dev ./src/singleton/retos/ShoppingCart.ts",
 		"lint": "npx eslint ./**.{js,mjs,cjs,ts,mts}",
 		"lint:fix": "npx eslint --fix ./**.{js,mjs,cjs,ts,mts}",
 		"prepare": "husky install"

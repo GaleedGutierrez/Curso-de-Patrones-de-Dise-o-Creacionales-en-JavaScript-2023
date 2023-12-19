@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * How to implement Singleton?
  *
@@ -14,7 +15,9 @@ class Singleton {
 	}
 
 	static getInstance(version) {
-		if (!Singleton.instance) Singleton.instance = new Singleton(version);
+		if (!Singleton.instance) {
+			Singleton.instance = new Singleton(version);
+		}
 
 		return Singleton.instance;
 	}

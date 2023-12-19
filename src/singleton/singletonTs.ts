@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * How to implement Singleton?
  *
@@ -5,7 +6,6 @@
  * 2. Create a static method who calls the private
  *  constructor and save the instance in a static variable
  */
-
 class Singleton {
 	#version: string;
 	// eslint-disable-next-line no-use-before-define

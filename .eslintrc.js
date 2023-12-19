@@ -1,4 +1,3 @@
-// @ts-check
 const env = {
 	es2022: true,
 	browser: true,
@@ -30,74 +29,10 @@ const parserOptions = {
 const rules = {
 	'prettier/prettier': 'error',
 
-	semi: ['error', 'always'],
-	'comma-spacing': [
-		'error',
-		{
-			before: false,
-			after: true,
-		},
-	],
-	'no-multi-spaces': [
-		'error',
-		{
-			ignoreEOLComments: false,
-		},
-	],
-	'padding-line-between-statements': [
-		'error',
-		{ blankLine: 'always', prev: '*', next: 'return' },
-		{ blankLine: 'always', prev: '*', next: 'block-like' },
-		{ blankLine: 'always', prev: ['case', 'default'], next: '*' },
-		{ blankLine: 'always', prev: 'directive', next: '*' },
-		{ blankLine: 'any', prev: 'directive', next: 'directive' },
-		{
-			blankLine: 'always',
-			prev: ['const', 'let', 'var'],
-			next: '*',
-		},
-		{
-			blankLine: 'any',
-			prev: ['const', 'let', 'var'],
-			next: ['const', 'let', 'var'],
-		},
-		{ blankLine: 'always', prev: 'block-like', next: '*' },
-		{ blankLine: 'always', prev: 'expression', next: '*' }, // veremos
-		{ blankLine: 'always', prev: '*', next: 'expression' }, // veremos
-		{ blankLine: 'any', prev: 'expression', next: 'expression' }, // veremos
-		{ blankLine: 'always', prev: 'import', next: '*' },
-		{ blankLine: 'any', prev: 'import', next: 'import' },
-		{ blankLine: 'always', prev: 'export', next: '*' },
-		{ blankLine: 'always', prev: '*', next: 'export' },
-		{ blankLine: 'always', prev: 'if', next: '*' },
-	],
-	'arrow-spacing': ['error', { before: true, after: true }],
-	'lines-between-class-members': [
-		'error',
-		'always',
-		{ exceptAfterSingleLine: true },
-	],
-	'object-curly-spacing': ['error', 'always'],
-	'computed-property-spacing': [
-		'error',
-		'never',
-		{ enforceForClassMembers: true },
-	],
-	'keyword-spacing': ['error', { before: true }],
-	'space-before-blocks': 'error',
-	'no-unneeded-ternary': 'error',
-	'no-lone-blocks': 'error',
-	'space-in-parens': ['error', 'never'],
-	'func-call-spacing': ['error', 'never'],
-	'no-console': ['warn', { allow: ['warn', 'error'] }], // Opcional
-	'no-underscore-dangle': 'error',
-	'prefer-arrow-callback': 'error',
-
-	//? TypeScript ESLint
+	//? TypeScript
 	'@typescript-eslint/no-explicit-any': 'error',
-	'@typescript-eslint/type-annotation-spacing': 'error',
 	'@typescript-eslint/no-non-null-assertion': 'warn',
-	'@typescript-eslint/consistent-type-definitions': 'warn',
+	'@typescript-eslint/consistent-type-definitions': 'error',
 	'@typescript-eslint/naming-convention': [
 		'error',
 		{
@@ -246,15 +181,7 @@ const rules = {
 		},
 	],
 
-	//? Codely: plugins
-	'import/first': 'error',
-	'import/newline-after-import': 'error',
-	'import/no-duplicates': 'error',
-	'import/no-unresolved': ['error', { ignore: ['\\.mjs'] }],
-	'import/no-webpack-loader-syntax': 'error',
-	'simple-import-sort/imports': 'error',
-	'simple-import-sort/exports': 'error',
-
+	//? Codely
 	'check-file/folder-naming-convention': [
 		'error',
 		{
@@ -262,17 +189,7 @@ const rules = {
 		},
 	],
 
-	'unused-imports/no-unused-imports': 'error',
-	'unused-imports/no-unused-vars': [
-		'warn',
-		{
-			vars: 'all',
-			varsIgnorePattern: '^_',
-			args: 'after-used',
-			argsIgnorePattern: '^_',
-		},
-	],
-
+	//error prevention
 	'array-callback-return': ['error', { checkForEach: true }],
 	'no-await-in-loop': 'error',
 	'no-constant-binary-expression': 'error',
@@ -283,12 +200,25 @@ const rules = {
 	'no-unmodified-loop-condition': 'error',
 	'no-unreachable-loop': 'error',
 	'no-unused-private-class-members': 'error',
-	'no-use-before-define': ['error'],
+	'no-use-before-define': [
+		'error',
+		{
+			functions: false,
+			classes: true,
+			variables: true,
+			allowNamedExports: false,
+		},
+	],
 	'require-atomic-updates': 'error',
+	'no-lone-blocks': 'error',
+	'no-underscore-dangle': 'error', // Opcional
+
+	// good practices
 	camelcase: 'error',
 	eqeqeq: 'error',
 	'new-cap': 'error',
 	'no-array-constructor': 'error',
+	'no-console': ['error', { allow: ['error'] }],
 	'no-else-return': ['error', { allowElseIf: false }],
 	'no-extend-native': 'error',
 	'no-lonely-if': 'error',
@@ -303,6 +233,63 @@ const rules = {
 	'prefer-template': 'error',
 	radix: 'error',
 	yoda: 'error',
+	'no-unneeded-ternary': 'error',
+	'prefer-arrow-callback': 'error', // Opcional
+
+	// style
+	curly: 'error',
+	'lines-between-class-members': [
+		'error',
+		'always',
+		{ exceptAfterSingleLine: true },
+	],
+	'padding-line-between-statements': [
+		'error',
+		{ blankLine: 'always', prev: '*', next: 'return' },
+		{ blankLine: 'always', prev: '*', next: 'block-like' },
+		{ blankLine: 'always', prev: ['case', 'default'], next: '*' },
+		{ blankLine: 'always', prev: 'directive', next: '*' },
+		{ blankLine: 'any', prev: 'directive', next: 'directive' },
+		{
+			blankLine: 'always',
+			prev: ['const', 'let', 'var'],
+			next: '*',
+		},
+		{
+			blankLine: 'any',
+			prev: ['const', 'let', 'var'],
+			next: ['const', 'let', 'var'],
+		},
+		{ blankLine: 'always', prev: 'block-like', next: '*' },
+		{ blankLine: 'always', prev: 'expression', next: '*' }, // veremos
+		{ blankLine: 'always', prev: '*', next: 'expression' }, // veremos
+		{ blankLine: 'any', prev: 'expression', next: 'expression' }, // veremos
+		{ blankLine: 'always', prev: 'import', next: '*' },
+		{ blankLine: 'any', prev: 'import', next: 'import' },
+		{ blankLine: 'always', prev: 'export', next: '*' },
+		{ blankLine: 'always', prev: '*', next: 'export' },
+		{ blankLine: 'always', prev: 'if', next: '*' },
+	],
+
+	// plugins
+	'import/first': 'error',
+	'import/newline-after-import': 'error',
+	'import/no-duplicates': 'error',
+	'import/no-unresolved': 'error',
+	'import/no-webpack-loader-syntax': 'error',
+	'simple-import-sort/exports': 'error',
+	'simple-import-sort/imports': 'error',
+	'unused-imports/no-unused-imports': 'error',
+	// 'no-unused-vars': 'off', // Opcional
+	'unused-imports/no-unused-vars': [
+		'warn',
+		{
+			vars: 'all',
+			varsIgnorePattern: '^_',
+			args: 'after-used',
+			argsIgnorePattern: '^_',
+		},
+	],
 };
 const settings = {
 	'import/resolver': {
