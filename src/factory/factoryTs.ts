@@ -32,6 +32,9 @@
  */
 
 // STEP 1
+/**
+ *
+ */
 interface BaseCar {
 	showCost(): void;
 }
@@ -51,6 +54,7 @@ class RhinoCar implements BaseCar {
 }
 
 // STEP 3
+
 interface CarFactory {
 	makeCar(): BaseCar;
 }
@@ -99,6 +103,9 @@ function appFactory(factory: CarFactory) {
 appFactory(new MastodonCarFactory());
 appFactory(new RhinoCarFactory());
 
+/**
+ *
+ */
 type FactoryType = 'mastodon' | 'rhino';
 
 /**
