@@ -20,7 +20,23 @@ const plugins = [
 	'check-file',
 	'editorconfig',
 ];
-const overrides = [];
+const overrides = [
+	// TSDoc
+	{
+		files: ['*.ts', '*.tsx', '*.mts', '*.cts'],
+		plugins: ['eslint-plugin-tsdoc'],
+		rules: {
+			'tsdoc/syntax': 'warn',
+		},
+	},
+
+	// JSDoc
+	{
+		files: ['*.js', '*.jsx', '*.mjs', '*.cjs'],
+		extends: ['plugin:jsdoc/recommended'],
+		plugins: ['jsdoc'],
+	},
+];
 const parserOptions = {
 	ecmaVersion: 'latest',
 	sourceType: 'module',

@@ -13,7 +13,7 @@ class Singleton {
 
 	/**
 	 * Constructor method to be called by static method
-	 * @param version value that represents the version of the instance
+	 * @param version - value that represents the version of the instance
 	 */
 
 	// STEP 1
@@ -23,7 +23,7 @@ class Singleton {
 
 	/**
 	 * Static method that returns unique created instance or create it
-	 * @param version used only to help us to differentiate the instances
+	 * @param version - used only to help us to differentiate the instances
 	 * @returns unique Singleton instance
 	 */
 
