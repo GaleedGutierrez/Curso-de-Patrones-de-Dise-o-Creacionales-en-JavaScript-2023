@@ -1,33 +1,115 @@
-export abstract class HttpsAdapter {
-	public adapter: string;
+/* eslint-disable no-unused-private-class-members */
+/* eslint-disable no-console */
+/**
+ *
+ * Factory Method challenge:
+ *
+ * Make a HttpAdapters factory.
+ *
+ * Steps followed to implement the solution:
+ *
+ * 1. Add HttpAdapter base product class
+ * 2. Add concrete implementation of HttpAdapter: RestHttpAdapter
+ * 3. Add HttpAdapterFactory base factory class
+ * 4. Add concrete implementation of HttpAdapterFactory: RestHttpAdapterFactory
+ */
 
-	public constructor(adapter: string) {
-		this.adapter = adapter;
+// ----- Base product -----
+
+/**
+ * HttpAdapter base class
+ */
+abstract class HttpAdapter {
+	#type: string;
+	/**
+	 * @param _type - adapter type eg. REST, GraphQL
+	 */
+	constructor(type: string) {
+		this.#type = type;
 	}
 
-	public abstract get(): void;
-	public abstract post(): void;
-	public abstract put(): void;
-	public abstract delete(): void;
+	abstract get(): void;
+
+	abstract post(): void;
+
+	abstract put(): void;
+
+	abstract delete(): void;
+
+	/**
+	 * @returns string - adapter type
+	 */
+	get type(): string {
+		return this.#type;
+	}
 }
 
-interface HttpAdapterFactory {
-	makeAdapter(): HttpsAdapter;
-}
+// ----- Concrete product -----
 
-export class RestHttpAdapter extends HttpsAdapter {
+class RestHttpAdapter extends HttpAdapter {
 	constructor() {
 		super('REST');
 	}
 
-	public get(): void {}
-	public post(): void {}
-	public put(): void {}
-	public delete(): void {}
+	/** @override get() method */
+	get() {
+		console.log(`[${this.type}] GET method`);
+	}
+
+	/** @override post() method */
+	post() {
+		console.log(`[${this.type}] POST method`);
+	}
+
+	/** @override put() method */
+	put() {
+		console.log(`[${this.type}] PUT method`);
+	}
+
+	/** @override delete() method */
+	delete() {
+		console.log(`[${this.type}] DELETE method`);
+	}
 }
 
-export class RestHttpAdapterFactory implements HttpAdapterFactory {
-	makeAdapter(): HttpsAdapter {
+// ----- Base Factory -----
+
+interface HttpAdapterFactory {
+	makeAdapter(): HttpAdapter;
+}
+
+// ----- Concrete Factory -----
+
+class RestHttpAdapterFactory implements HttpAdapterFactory {
+	/**
+	 * @override makeAdapter() method
+	 * @returns HttpAdapter
+	 */
+	makeAdapter() {
 		return new RestHttpAdapter();
 	}
 }
+
+/**
+ * Main function
+ * @param factory - HttpAdapter factory
+ */
+function appFactory(factory: HttpAdapterFactory) {
+	console.log('--- [JS] Calling appFactory ---\n');
+
+	if (!factory) {
+		console.log('--- No factory provided ---');
+
+		return;
+	}
+
+	const adapter = factory.makeAdapter();
+
+	console.log(`Http Adapter is ${adapter.type}\n`);
+	adapter.get();
+	adapter.post();
+	adapter.put();
+	adapter.delete();
+}
+
+appFactory(new RestHttpAdapterFactory());
